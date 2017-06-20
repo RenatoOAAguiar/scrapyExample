@@ -11,7 +11,6 @@ class keywordSpider(Spider):
     keyword = None
     searchEngine = None
     selector = None
-    cont = 0
 
     def __init__(self, keyword, se = 'bing', pages = 1,  *args, **kwargs):
         super(keywordSpider, self).__init__(*args, **kwargs)
@@ -24,9 +23,10 @@ class keywordSpider(Spider):
             self.start_urls.append(url)
 
     def parse(self, response):
+        cont = 0
         for url in Selector(response).xpath(self.selector).extract():
-            self.cont = self.cont + 1
-            file = open(str(self.cont) + '.txt', 'wb')
+            cont = cont + 1
+            file = open(str(cont) + '.txt', 'wb')
             file.write(response.xpath('//body').extract())
             yield {'url':url}
 
