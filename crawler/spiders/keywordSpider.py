@@ -7,7 +7,7 @@ import json
 
 class keywordSpider(Spider):
     name = 'keywordSpider'
-    allowed_domains = ['bing.com','google.com','*.com']
+    allowed_domains = ['bing.com', 'google.com', '*.com']
     start_urls = []
     keyword = None
     searchEngine = None
@@ -22,13 +22,12 @@ class keywordSpider(Spider):
         for url in pageUrls:
             print(url)
             self.start_urls.append(url)
-            
 
     def parse(self, response):
-	    html = Selector(response).xpath('//html//text()').extract()
         with open("texto.json", "w") as outfile:
-       		json.dump({'html':html}, outfile, indent=4)
+            json.dump({'html':Selector(response).xpath('//html//text()').extract()}, outfile)
+            
         for url in Selector(response).xpath(self.selector).extract():
-            yield {'url':url}
+           yield {'url':url}
 
         pass
