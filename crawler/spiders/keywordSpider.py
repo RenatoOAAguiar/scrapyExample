@@ -9,7 +9,7 @@ import html2text
 
 class keywordSpider(Spider):
     name = 'keywordSpider'
-    allowed_domains = ['bing.com','google.com']
+    allowed_domains = ['bing.com','google.com','*.com']
     start_urls = []
     keyword = None
     searchEngine = None
