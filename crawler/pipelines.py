@@ -13,5 +13,5 @@ class SespiderPipeline(object):
         #self.bloomFilter = rBloomFilter.rBloomFilter(100000, 0.01, 'bing')
 
     def process_item(self, item, spider):
-        self.file.write(item['url']+'\n')
+        self.file.write('URL:' + item['url']+'\n' + 'DATA:\n' + item['data'] + '\n')
         return item
