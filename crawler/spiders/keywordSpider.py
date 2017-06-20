@@ -27,7 +27,6 @@ class keywordSpider(Spider):
     def parse(self, response):
         sel = Selector(response)
         google_search_links_list = sel.xpath('//h3/a/@href').extract()
-        google_search_links_list = [re.search('q=(.*)&sa',n).group(1) for n in google_search_links_list]
         
         ## Dump the output to json file
         with open("texto", "w") as outfile:
