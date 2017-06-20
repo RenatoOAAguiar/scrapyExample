@@ -12,6 +12,7 @@ class keywordSpider(Spider):
     keyword = None
     searchEngine = None
     selector = None
+    cont = 0
 
 
     def __init__(self, keyword, se = 'bing', pages = 50,  *args, **kwargs):
@@ -25,10 +26,9 @@ class keywordSpider(Spider):
             self.start_urls.append(url)
 
     def parse(self, response):
-        cont = 0
+        self.cont = self.cont + 1
         for html in Selector(response).xpath('//html//text()').extract():
-            cont = cont +1
-            with open(str(cont) + "texto.json", "w") as outfile:
+            with open(str(self.cont) + "texto.json", "w") as outfile:
                 json.dump({'html':html}, outfile)
                 
         for url in Selector(response).xpath(self.selector).extract():
