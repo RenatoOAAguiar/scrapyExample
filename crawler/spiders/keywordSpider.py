@@ -25,8 +25,15 @@ class keywordSpider(Spider):
             print(url)
             self.start_urls.append(url)
 
-    def parse(self, response):    
+    def parse(self, response):
+        self.cont = self.cont + 1
+        conteudo = response.xpath('//body/text()').extract()
+        #for html in Selector(response).xpath('//body/text()').extract():
+        with open(str(self.cont) + "texto.json", "w") as outfile:
+            json.dump({'html':conteudo}, outfile)
+                
         for url in Selector(response).xpath(self.selector).extract():
-            yield {'url':url,
-                   'data':Selector(response).xpath('//body/text()').extract()}
+            yield {'url':Selector(response).xpath('//body/text()').extract()}
+            # yield {'url':url}
+
         pass
