@@ -23,6 +23,9 @@ class keywordSpider(Spider):
         self.selector = SearchEngineResultSelectors[self.searchEngine]
         pageUrls = searResultPages(keyword, se, int(pages))
         for url in pageUrls:
+	    self.cont = self.cont + 1
+	    with open(str(self.cont) + "texto.json", "w") as outfile:
+            	json.dump({'url_body':body}, outfile, indent=4)
             print(url)
             self.start_urls.append(url)
             
@@ -30,9 +33,10 @@ class keywordSpider(Spider):
     def parse(self, response):
         body = Selector(response).xpath('//body//p//text()').extract()
         ## Dump the output to json file
-        self.cont = self.cont + 1
-        with open(self.cont + "texto.json", "w") as outfile:
-            json.dump({'url_body':body}, outfile, indent=4)
+	for i in range(self.cont, 0):
+		with open(str(self.cont) + "texto.json", "w") as outfile:
+			feeds.append({'url_body':body})
+			json.dump(feeds, outfile, indent=4)
         for url in Selector(response).xpath(self.selector).extract():
             yield {'url':url}
 
