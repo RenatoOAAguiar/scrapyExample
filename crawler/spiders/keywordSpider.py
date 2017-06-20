@@ -24,6 +24,12 @@ class keywordSpider(Spider):
         for url in pageUrls:
             print(url)
             self.start_urls.append(url)
+    
+    def parse_test(self, response):
+        body = Selector(response).xpath('//body//p//text()').extract()
+        ## Dump the output to json file
+        with open("texto.json", "wb") as outfile:
+            json.dump({'url_body':body}, outfile, indent=4)
 
     def parse(self, response):
         for url in Selector(response).xpath(self.selector).extract():
@@ -33,12 +39,3 @@ class keywordSpider(Spider):
             yield {'url':url}
 
         pass
-
-    
-    def parse_test(self, response):
-	    body = Selector(response).xpath('//body//p//text()').extract()
-        ## Dump the output to json file
-        with open("texto.json", "wb") as outfile:
-            json.dump({'url_body':body}, outfile, indent=4)
-
-                
