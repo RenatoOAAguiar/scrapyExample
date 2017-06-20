@@ -23,11 +23,7 @@ class keywordSpider(Spider):
             self.start_urls.append(url)
 
     def parse(self, response):
-        cont = 0
         for url in Selector(response).xpath(self.selector).extract():
-            cont = cont + 1
-            file = open(str(cont) + '.txt', 'wb')
-            file.write(response.xpath('//body').extract())
             yield {'url':url}
 
         pass
