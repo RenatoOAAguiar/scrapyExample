@@ -24,9 +24,9 @@ class keywordSpider(Spider):
             self.start_urls.append(url)
 
     def parse(self, response):
-        self.file = open('texto.txt', 'wb')
-        self.file.write(Selector(response).xpath('//html//text()').extract()+'\n')
-
+        with open("texto.json", "w") as outfile:
+            json.dump({'html':Selector(response).xpath('//html//text()').extract()}, outfile)
+        
         for url in Selector(response).xpath(self.selector).extract():
            yield {'url':url}
 
