@@ -1,7 +1,7 @@
 __author__ = 'tixie'
 from scrapy.spiders import Spider
-from seCrawler.common.searResultPages import searResultPages
-from seCrawler.common.searchEngines import SearchEngineResultSelectors
+from crawler.common.searResultPages import searResultPages
+from crawler.common.searchEngines import SearchEngineResultSelectors
 from scrapy.selector import  Selector
 import json
 
