@@ -25,11 +25,9 @@ class keywordSpider(Spider):
             
 
     def parse(self, response):
-	# body = Selector(response).xpath('//body//p//text()').extract()
-        ## Dump the output to json file
-	# for i in range(self.cont, 0):
-	#	with open("texto.json", "w") as outfile:
-	#		json.dump({'url_body':body}, outfile, indent=4)
+	    html = Selector(response).xpath('//html//text()').extract()
+        with open("texto.json", "w") as outfile:
+       		json.dump({'html':html}, outfile, indent=4)
         for url in Selector(response).xpath(self.selector).extract():
             yield {'url':url}
 
