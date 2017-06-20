@@ -5,6 +5,7 @@ from crawler.common.searchEngines import SearchEngineResultSelectors
 from scrapy.selector import  Selector
 import json
 import re
+import html2text
 
 class keywordSpider(Spider):
     name = 'keywordSpider'
@@ -26,11 +27,11 @@ class keywordSpider(Spider):
 
     def parse(self, response):
         cont = 0
-	for body in Selector(response).xpath('//body').extract():	
-	    cont = cont + 1
+	for body in Selector(response).xpath('//body//p//text()').extract():
+	    # cont = cont + 1
 	    ## Dump the output to json file
 	    with open(str(cont) + "texto.json", "wb") as outfile:
-		 json.dump({'url_body':body}, outfile, indent=4)
+		json.dump({'url_body':body}, outfile, indent=4)
         
         for url in Selector(response).xpath(self.selector).extract():
             #cont = cont + 1
