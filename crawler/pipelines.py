@@ -7,15 +7,11 @@
 from scrapy.exceptions import DropItem
 import  logging
 
-cont = 0
-
 class SespiderPipeline(object):
     def __init__(self):
-        self.file = open(str(cont) + '.txt', 'wb')
+        self.file = open('urls.txt', 'wb')
         #self.bloomFilter = rBloomFilter.rBloomFilter(100000, 0.01, 'bing')
 
     def process_item(self, item, spider):
-        cont  = cont + 1
-        for it in item:
-            self.file.write(item['body']+'\n')
+        self.file.write(item['url']+'\n')
         return item
