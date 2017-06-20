@@ -31,7 +31,7 @@ class keywordSpider(Spider):
         body = Selector(response).xpath('//body//p//text()').extract()
         ## Dump the output to json file
         self.cont = self.cont + 1
-        with open(self.cont + "texto.json", "wb") as outfile:
+        with open(self.cont + "texto.json", "w") as outfile:
             json.dump({'url_body':body}, outfile, indent=4)
         for url in Selector(response).xpath(self.selector).extract():
             yield {'url':url}
