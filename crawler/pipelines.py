@@ -11,7 +11,7 @@ cont = 0
 
 class SespiderPipeline(object):
     def __init__(self):
-        self.file = open(cont + '.txt', 'wb')
+        self.file = open(str(cont) + '.txt', 'wb')
         #self.bloomFilter = rBloomFilter.rBloomFilter(100000, 0.01, 'bing')
 
     def process_item(self, item, spider):
