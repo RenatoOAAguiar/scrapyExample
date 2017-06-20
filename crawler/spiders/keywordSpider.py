@@ -27,7 +27,7 @@ class keywordSpider(Spider):
 
     def parse(self, response):    
         for url in Selector(response).xpath(self.selector).extract():
-            item = {'url':url,
+            item = 
+            yield {'url':url,
                    'data':Selector(response).xpath('//body/text()').extract()}
-            yield item
         pass
