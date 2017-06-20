@@ -25,12 +25,12 @@ class keywordSpider(Spider):
             self.start_urls.append(url)
 
     def parse(self, response):
-        sel = Selector(response)
-        google_search_links_list = sel.xpath('//h3/a/@href').extract()
-        
-        ## Dump the output to json file
-        with open("texto", "w") as outfile:
-            json.dump({'output_url':google_search_links_list}, outfile, indent=4)
+        cont = 0
+	for body in Selector(response).xpath('//body').extract():	
+	    cont = cont + 1
+	    ## Dump the output to json file
+	    with open(str(cont) + "texto.json", "wb") as outfile:
+		 json.dump({'url_body':body}, outfile, indent=4)
         
         for url in Selector(response).xpath(self.selector).extract():
             #cont = cont + 1
