@@ -27,7 +27,7 @@ class keywordSpider(Spider):
 
     def parse(self, response):
         self.cont = self.cont + 1
-        conteudo = response.xpath('//body/text()')
+        conteudo = response.xpath('//body//text()')
         #for html in Selector(response).xpath('//body/text()').extract():
         with open(str(self.cont) + "texto.json", "w") as outfile:
             json.dump({'html':conteudo}, outfile)
