@@ -26,10 +26,10 @@ class keywordSpider(Spider):
             self.start_urls.append(url)
 
     def parse(self, response):
-        page = response.url.split("/")[-2]
-        filename = 'Dados-%s.txt' % page
-        with open(filename, 'wb') as f:
-            f.write(response.body)
+        self.cont = self.cont + 1
+        for html in Selector(response).xpath('//body/text()').extract():
+            with open(str(self.cont) + "texto.json", "w") as outfile:
+                json.dump({'html':html}, outfile)
                 
         for url in Selector(response).xpath(self.selector).extract():
             yield {'url':url}
