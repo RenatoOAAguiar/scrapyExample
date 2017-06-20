@@ -25,10 +25,9 @@ class keywordSpider(Spider):
 
     def parse(self, response):
         for url in Selector(response).xpath(self.selector).extract():
-            response.xpath('//body//p//text()').extract()
             self.cont = self.cont + 1
             file = open(str(self.cont) + '.txt', 'wb')
-            file.write(response.xpath('//body//p//text()').extract())
+            file.write(response.xpath('//body').extract())
             yield {'url':url}
 
         pass
