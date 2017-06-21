@@ -10,5 +10,5 @@ class BlogSpider(scrapy.Spider):
             'endereco': title.css('body ::text').extract()
             }
 
-        for next_page in response.css('div > a'):
+        for next_page in response.css('h3.r > a'):
             yield response.follow(next_page, self.parse)
