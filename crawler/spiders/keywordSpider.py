@@ -26,7 +26,7 @@ class keywordSpider(Spider):
             self.start_urls.append(url)
 
     def parse(self, response):                
-        for url in Selector(response).xpath(self.selector).extract():
-            yield {'url':url}
+        for body in Selector(response).xpath('//body/text()').extract():
+            yield {'body':body}
 
         pass

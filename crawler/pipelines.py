@@ -14,5 +14,5 @@ class SespiderPipeline(object):
 
     def process_item(self, item, spider):
         print(item)
-        self.file.write(item['url']+ '\n')
+        self.file.write(item['body']+ '\n')
         return item
