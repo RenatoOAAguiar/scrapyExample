@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'crawler.spiders'
 
 ITEM_PIPELINES = {'crawler.pipelines.SespiderPipeline': 1}
 
-USER_AGENT = "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36"
+# USER_AGENT = "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36"
 
 DEPTH_LIMIT = 1
 
